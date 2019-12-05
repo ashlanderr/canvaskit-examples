@@ -1,0 +1,21 @@
+{
+  "name": "canvaskit-examples",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/canvaskit-wasm": "^0.9.0",
+    "canvaskit-wasm": "^0.9.0",
+    "copy-webpack-plugin": "^5.0.5",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
