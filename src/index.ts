@@ -6,6 +6,7 @@ import formattedText from "./formatted-text";
 import alignedText from "./aligned-text";
 import animation from "./animation";
 import gif from "./gif";
+import interactiveAnimation from "./interactive-animation";
 
 async function main() {
   const url = window.location.pathname;
@@ -34,6 +35,9 @@ async function main() {
       break;
     case '/animation':
       await animation(CanvasKit, surface, canvas);
+      break;
+    case '/interactive-animation':
+      await interactiveAnimation(CanvasKit, surface, canvas, htmlCanvas);
       break;
     case '/images':
       await images(CanvasKit, surface, canvas);
