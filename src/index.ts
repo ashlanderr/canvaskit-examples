@@ -4,9 +4,10 @@ import helloWorld from './hello-world';
 import simpleText from "./simple-text";
 import formattedText from "./formatted-text";
 import alignedText from "./aligned-text";
-import animation from "./animation";
+import simpleAnimation from "./simple-animation";
 import gif from "./gif";
 import interactiveAnimation from "./interactive-animation";
+import transformedAnimation from "./transformed-animation";
 
 async function main() {
   const url = window.location.pathname;
@@ -33,8 +34,11 @@ async function main() {
     case '/aligned-text':
       await alignedText(CanvasKit, surface, canvas);
       break;
-    case '/animation':
-      await animation(CanvasKit, surface, canvas);
+    case '/simple-animation':
+      await simpleAnimation(CanvasKit, surface, canvas);
+      break;
+    case '/transformed-animation':
+      await transformedAnimation(CanvasKit, surface, canvas);
       break;
     case '/interactive-animation':
       await interactiveAnimation(CanvasKit, surface, canvas, htmlCanvas);

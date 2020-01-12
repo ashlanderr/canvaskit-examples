@@ -6,14 +6,14 @@ async function loadAnimation(CanvasKit: CanvasKit, src: string): Promise<SkAnima
 }
 
 export default async function (CanvasKit: CanvasKit, surface: SkSurface, canvas: SkCanvas, htmlCanvas: HTMLCanvasElement) {
-  // https://lottiefiles.com/13587-toggle-switch
-  const toggleAnimation = await loadAnimation(CanvasKit, 'toggle.json');
+  // https://lottiefiles.com/1978-lightdark
+  const toggleAnimation = await loadAnimation(CanvasKit, 'lightdark.json');
 
   let toggleState = 0;
   let toggleTime = 0;
 
   htmlCanvas.onclick = () => {
-    toggleState = toggleState + toggleAnimation.duration() * 0.5;
+    toggleState = 1 - toggleState;
   };
 
   let t1 = performance.now();
@@ -26,13 +26,13 @@ export default async function (CanvasKit: CanvasKit, surface: SkSurface, canvas:
 
     canvas.clear(CanvasKit.TRANSPARENT);
 
-    canvas.drawText("Try clicking the switch", 0, 30, paint, font);
+    canvas.drawText("Try clicking the canvas", 0, 30, paint, font);
 
     toggleAnimation.render(canvas, CanvasKit.XYWHRect(
       0,
       60,
-      toggleAnimation.size().w,
-      toggleAnimation.size().h,
+      500,
+      500,
     ));
 
     surface.flush();
@@ -41,8 +41,11 @@ export default async function (CanvasKit: CanvasKit, surface: SkSurface, canvas:
     const dt = (t2 - t1) / 1000;
     t1 = t2;
 
-    toggleTime = toggleTime < toggleState ? toggleTime + dt : toggleTime;
-    toggleAnimation.seek(toggleTime / toggleAnimation.duration() % 1);
+    if (toggleTime != toggleState) {
+      const dir = Math.sign(toggleState - toggleTime);
+      toggleTime = Math.max(0, Math.min(toggleTime + dt * dir, 1));
+    }
+    toggleAnimation.seek(toggleTime);
   }
 
   render();
